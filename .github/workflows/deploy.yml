@@ -17,11 +17,10 @@ jobs:
             apt install -y apache2
       - name: Deploy html file
         uses: appleboy/scp-action@master
-        env:
+        with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-        with:
-          source: "./www/*"
+          source: "www/*"
           target: "/var/www/html/"
           strip_components: 1
