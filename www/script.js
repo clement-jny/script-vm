@@ -1,12 +1,15 @@
 const btn = document.getElementById("btn");
+const img = document.getElementById("img");
 const audioElem = document.getElementById("audio");
 var musicPlay = false;
 
 const audio = new Audio();
 window.onload = () => {
   //const musicName = "music.mp3";
-  const musicName = "rick.mp3";
+  //const musicName = "rick.mp3";
+  const musicName = "nyan_cat.mp3";
   audio.src = musicName;
+  audio.loop = true;
   audio.load();
 }
 
@@ -14,11 +17,11 @@ btn.addEventListener("click", () => {
   if (musicPlay) {
     audio.pause();
     musicPlay = false;
-    btn.innerHTML = "Play";
+    img.src = "play.png";
   } else {
     audio.play();
     musicPlay = true;
-    btn.innerHTML = "Pause";
+    img.src = "pause.png";
   }
 });
 

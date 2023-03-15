@@ -42,3 +42,14 @@ h1 {
   font-size: x-large;
   margin: 10px;
 }
+
+#btn {
+  cursor: pointer;
+  border: 0px;
+  background-color: transparent;
+  color: #3498db;
+  font-size: 1.5em;
+}
+#img {
+  height: 45px;
+}
