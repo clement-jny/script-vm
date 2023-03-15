@@ -12,5 +12,6 @@ jobs:
           HOST: 57.128.84.35
           USERNAME: root
           PASSWORD: tamimpomme
+      - name: Test
         run: wall test
 
