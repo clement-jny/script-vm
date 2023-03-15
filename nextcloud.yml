@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Vérification des privilèges root
+if [[ $EUID -ne 0 ]]; then
+   echo "Ce script doit être exécuté en tant que root" 
+   exit 1
+fi
+
+# Installation des dépendances
+apt update
+apt install -y apache2 mariadb-server libapache2-mod-php7.4 php7.4-gd php7.4-mysql php7.4-curl php7.4-mbstring php7.4-intl php7.4-gmp php7.4-bcmath php-imagick php7.4-xml php7.4-zip
+
+# Téléchargement et installation de Nextcloud
+wget https://download.nextcloud.com/server/releases/nextcloud-22.2.0.tar.bz2
+tar -xjf nextcloud-22.2.0.tar.bz2 -C /var/www/html/
+chown -R www-data:www-data /var/www/html/nextcloud/
+chmod 750 /var/www/html/nextcloud/
+
+# Configuration d'Apache
+cat << EOF > /etc/apache2/sites-available/nextcloud.conf
+Alias /nextcloud "/var/www/html/nextcloud/"
+
+<Directory /var/www/html/nextcloud/>
+  Require all granted
+  AllowOverride All
+  Options FollowSymLinks MultiViews
+
+  <IfModule mod_dav.c>
+    Dav off
+  </IfModule>
+</Directory>
+EOF
+
+a2ensite nextcloud.conf
+a2enmod rewrite
+systemctl restart apache2
+
+# Configuration de la base de données
+mysql -u root << EOF
+CREATE DATABASE nextcloud;
+CREATE USER 'nextclouduser'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextclouduser'@'localhost';
+FLUSH PRIVILEGES;
+EOF
+
+# Finalisation de l'installation
+echo "Installation de Nextcloud terminée. Accédez à http://localhost/nextcloud pour configurer l'application."
