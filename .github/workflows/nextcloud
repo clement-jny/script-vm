@@ -6,15 +6,12 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: debian-latest
 
     steps:
     - name: Cloner le dépôt
       uses: actions/checkout@v2
-
-    - name: Installer SSH
-      run: sudo apt-get install openssh-client
-
+      
     - name: Déployer le script
       run: ssh root@57.128.84.35 'bash -s' < deploy-nextcloud.sh
       env:
