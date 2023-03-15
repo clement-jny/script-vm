@@ -21,3 +21,12 @@ jobs:
         script: |
           cd /path/to/nextcloud
           ./deploy-nextcloud.sh
+
+- name: Deploy page
+        uses: appleboy/scp-action@master
+        env:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+      - name: Test
+        run: wall test
