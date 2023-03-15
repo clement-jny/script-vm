@@ -18,6 +18,4 @@ jobs:
       - name: Deploy html file
         uses: appleboy/scp-action@master
         with:
-          source: "www/*"
-          target: "/var/www/html/"
-          strip_components: 1
+          script: wall test
