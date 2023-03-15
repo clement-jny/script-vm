@@ -4,7 +4,8 @@ var musicPlay = false;
 
 const audio = new Audio();
 window.onload = () => {
-  const musicName = "music.mp3";
+  //const musicName = "music.mp3";
+  const musicName = "rick.mp3";
   audio.src = musicName;
   audio.load();
 }
