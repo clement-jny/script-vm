@@ -1,18 +1,21 @@
-name: remote ssh command
-on: [push]
+name: Déploiement Nextcloud
+
+on:
+  push:
+    branches: [ main ]
+
 jobs:
-
-  build:
-    name: Build
+  deploy:
     runs-on: ubuntu-latest
-    steps:
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@v0.1.8
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        script: whoami
-    - name: executing nextcloud remote ssh commands using password
 
+    steps:
+    - name: Cloner le dépôt
+      uses: actions/checkout@v2
+
+    - name: Installer SSH
+      run: sudo apt-get install openssh-client
+
+    - name: Déployer le script
+      run: ssh user@ip_address 'bash -s' < deploy-nextcloud.sh
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
