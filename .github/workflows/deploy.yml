@@ -15,5 +15,6 @@ jobs:
           script: |
             apt update
             apt install -y apache2
+            rm -rf script-vm
             git clone https://github.com/clement-jny/script-vm.git
             mv /root/script-vm/www/* /var/www/html
