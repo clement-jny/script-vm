@@ -6,12 +6,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Connect to linux
+      - name: Connect to linux, instal appache and deploy html file
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
+          source: "./www/*"
+          target: "/var/www/html/"
+          strip_components: 1
           script: |
-            wall Connected!
-            wall non
+            apt update
+            apt install apache2

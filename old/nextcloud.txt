@@ -1,17 +1,12 @@
-name: Deploy Nextcloud
 
-on:
-  push:
-    branches: [main]
+
 
 jobs:
   deploy:
     runs-on: debian-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@main
-      
+
     - name: Deploy Nextcloud
       uses: appleboy/ssh-action@master
       with:
