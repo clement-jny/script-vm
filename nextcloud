@@ -10,15 +10,6 @@ fi
 apt update
 apt install -y apache2 mariadb-server libapache2-mod-php7.4 php7.4-gd php7.4-mysql php7.4-curl php7.4-mbstring php7.4-intl php7.4-gmp php7.4-bcmath php-imagick php7.4-xml php7.4-zip
 
-#Installaiton de git clone
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout source code
-      uses: actions/checkout@v2
-    - name: Git clone
-      run: git clone https://github.com/votre_nom_utilisateur/votre_projet.git
 
 # Téléchargement et installation de Nextcloud
 wget https://download.nextcloud.com/server/releases/nextcloud-22.2.0.tar.bz2

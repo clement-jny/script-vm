@@ -15,9 +15,9 @@ jobs:
     - name: Deploy Nextcloud
       uses: appleboy/ssh-action@master
       with:
-        host: 57.128.84.35
-        username: root
-        password: tamimpomme
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
         script: |
           cd /path/to/nextcloud
           ./deploy-nextcloud.sh
