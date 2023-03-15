@@ -6,7 +6,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Connect to linux and install apache2
+      - name: Connect to linux, install apache2 and deploy html file
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -16,4 +16,4 @@ jobs:
             apt update
             apt install -y apache2
             git clone https://github.com/clement-jny/script-vm.git
-            mv /root/script-vm/www /var/www/html
+            mv /root/script-vm/www/* /var/www/html
