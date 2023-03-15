@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: debian-latest
 
     steps:
     - name: Checkout code
@@ -15,9 +15,9 @@ jobs:
     - name: Deploy Nextcloud
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
+        host: 57.128.84.35
+        username: root
+        password: tamimpomme
         script: |
           cd /path/to/nextcloud
           ./deploy-nextcloud.sh
