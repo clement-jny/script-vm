@@ -4,6 +4,12 @@
 //   window.alert("coucou");
 // });
 
+window.addEventListener("load", () => {
+  const musicName = "music.mp3";
+  const audio = new Audio(musicName);
+  audio.play();
+})
+
 particlesJS("particles-js",
   {
     "particles": {
