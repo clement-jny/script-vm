@@ -1,14 +1,26 @@
-// const btn = document.getElementById("btn");
+const btn = document.getElementById("btn");
+const audioElem = document.getElementById("audio");
+var musicPlay = false;
 
-// btn.addEventListener("click", () => {
-//   window.alert("coucou");
-// });
-
-window.addEventListener("load", () => {
+const audio = new Audio();
+window.onload = () => {
   const musicName = "music.mp3";
-  const audio = new Audio(musicName);
-  audio.play();
-})
+  audio.src = musicName;
+  audio.load();
+}
+
+btn.addEventListener("click", () => {
+  if (musicPlay) {
+    audio.pause();
+    musicPlay = false;
+    btn.innerHTML = "Play";
+  } else {
+    audio.play();
+    musicPlay = true;
+    btn.innerHTML = "Pause";
+  }
+});
+
 
 particlesJS("particles-js",
   {
