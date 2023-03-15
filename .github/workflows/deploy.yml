@@ -1,13 +1,10 @@
 name: page deployment
-
 on:
   push:
     branches: [main]
-
 jobs:
   deploy:
     runs-on: debian-latest
-
     steps:
       - uses: actions/checkout@main
       - name: deploy page
