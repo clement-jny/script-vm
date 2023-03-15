@@ -1,18 +1,23 @@
-name: Déploiement Nextcloud
+name: Deploy Nextcloud
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   deploy:
-    runs-on: debian-latest
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Cloner le dépôt
+    - name: Checkout code
       uses: actions/checkout@v2
       
-    - name: Déployer le script
-      run: ssh root@57.128.84.35 'bash -s' < deploy-nextcloud.sh
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Deploy Nextcloud
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        script: |
+          cd /path/to/nextcloud
+          ./deploy-nextcloud.sh
